@@ -13,10 +13,7 @@ export const useTodoStore = create(
     (set) => ({
       addTodo: (text: string) => {
         set((state) => ({
-          todos: [
-            ...state.todos,
-            { id: nextTodoId++, text, completed: false },
-          ],
+          todos: [...state.todos, { id: nextTodoId++, text, completed: false }],
         }));
       },
       toggleTodo: (id: number) => {

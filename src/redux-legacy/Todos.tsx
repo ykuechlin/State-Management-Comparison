@@ -55,9 +55,7 @@ class AddTodo extends Component<AddTodoProps, AddTodoState> {
             flex={1}
             placeholder="What needs to be done?"
             value={this.state.input}
-            onChange={(event) =>
-              this.setState({ input: event.currentTarget.value })
-            }
+            onChange={(event) => this.setState({ input: event.currentTarget.value })}
           />
           <Button type="submit">Add</Button>
         </Group>
@@ -90,10 +88,7 @@ class TodoItem extends Component<TodoItemProps> {
         <Group justify="space-between" wrap="nowrap">
           <Group gap="sm" wrap="nowrap">
             <Checkbox checked={completed} onChange={this.handleToggle} />
-            <Text
-              td={completed ? "line-through" : undefined}
-              c={completed ? "dimmed" : undefined}
-            >
+            <Text td={completed ? "line-through" : undefined} c={completed ? "dimmed" : undefined}>
               {text}
             </Text>
           </Group>
@@ -165,11 +160,7 @@ class FilterLink extends Component<FilterLinkProps> {
     const isActive = filter === currentFilter;
 
     return (
-      <Button
-        variant={isActive ? "filled" : "light"}
-        size="compact-sm"
-        onClick={this.handleClick}
-      >
+      <Button variant={isActive ? "filled" : "light"} size="compact-sm" onClick={this.handleClick}>
         {children}
       </Button>
     );
@@ -241,11 +232,7 @@ class TodosApp extends Component<TodosAppProps> {
           todos
         </Title>
         <AddTodo addTodo={addTodo} />
-        <TodoList
-          todos={todos}
-          toggleTodo={toggleTodo}
-          removeTodo={removeTodo}
-        />
+        <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
         <Footer
           activeCount={activeCount}
           currentFilter={visibilityFilter}
@@ -283,4 +270,5 @@ function mapDispatchToProps(dispatch: Dispatch<TodoAction>) {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export default connector(TodosApp);
+const TodosAppRoot = connector(TodosApp);
+export default TodosAppRoot;

@@ -3,21 +3,23 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { MantineProvider } from "@mantine/core";
-import {
-  createRootRoute,
-  createRoute,
-  createRouter,
-  RouterProvider,
-} from "@tanstack/react-router";
+import { createRootRoute, createRoute, createRouter, RouterProvider } from "@tanstack/react-router";
 import ReduxLegacyMain from "./redux-legacy";
 import ReduxToolkitMain from "./redux-toolkit";
 import ZustandMain from "./zustand";
 import JotaiMain from "./jotai";
 import ValtioMain from "./valtio";
 import XStateStoreMain from "./xstate-store";
+import Home from "./Home";
 
 const rootRoute = createRootRoute({
   component: App,
+});
+
+const homeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/",
+  component: Home,
 });
 
 const reduxLegacyRoute = createRoute({
@@ -58,6 +60,7 @@ const xstateStoreRoute = createRoute({
 
 const router = createRouter({
   routeTree: rootRoute.addChildren([
+    homeRoute,
     reduxLegacyRoute,
     reduxToolkit,
     zustandRoute,
@@ -69,7 +72,7 @@ const router = createRouter({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider>
+    <MantineProvider defaultColorScheme="dark">
       <RouterProvider router={router} />
     </MantineProvider>
   </StrictMode>,

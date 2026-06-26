@@ -1,4 +1,4 @@
-import { AppShell, Button, Group, Title } from "@mantine/core";
+import { AppShell, Button, Container, Group, Title } from "@mantine/core";
 import { Link, Outlet } from "@tanstack/react-router";
 
 const links = [
@@ -14,18 +14,24 @@ export default function App() {
   return (
     <AppShell header={{ height: 64 }}>
       <AppShell.Header>
-        <Group align="center" h="100%" px="lg">
-          <Title flex={1}>Overview of State management</Title>
-          {links.map((l) => (
-            <Button component={Link} to={l.to} key={l.to}>
-              {l.label}
-            </Button>
-          ))}
-        </Group>
+        <Container size="lg" h="100%">
+          <Group align="center" h="100%" gap="sm">
+            <Link to="/" style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
+              <Title size="xl">Overview of State management</Title>
+            </Link>
+            {links.map((l) => (
+              <Button component={Link} to={l.to} key={l.to} variant="subtle">
+                {l.label}
+              </Button>
+            ))}
+          </Group>
+        </Container>
       </AppShell.Header>
 
       <AppShell.Main>
-        <Outlet />
+        <Container size="lg" py="xl">
+          <Outlet />
+        </Container>
       </AppShell.Main>
     </AppShell>
   );

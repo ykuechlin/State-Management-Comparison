@@ -66,10 +66,7 @@ function TodoItem({ id, text, completed }: TodoItemProps) {
       <Group justify="space-between" wrap="nowrap">
         <Group gap="sm" wrap="nowrap">
           <Checkbox checked={completed} onChange={() => toggleTodo(id)} />
-          <Text
-            td={completed ? "line-through" : undefined}
-            c={completed ? "dimmed" : undefined}
-          >
+          <Text td={completed ? "line-through" : undefined} c={completed ? "dimmed" : undefined}>
             {text}
           </Text>
         </Group>
@@ -102,12 +99,7 @@ function TodoList() {
   return (
     <Stack gap="xs">
       {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id}
-          text={todo.text}
-          completed={todo.completed}
-        />
+        <TodoItem key={todo.id} id={todo.id} text={todo.text} completed={todo.completed} />
       ))}
     </Stack>
   );

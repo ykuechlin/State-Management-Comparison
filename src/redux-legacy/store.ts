@@ -33,10 +33,7 @@ export function setVisibilityFilter(filter: VisibilityFilter) {
 }
 
 export type TodoAction = ReturnType<
-  | typeof addTodo
-  | typeof toggleTodo
-  | typeof removeTodo
-  | typeof setVisibilityFilter
+  typeof addTodo | typeof toggleTodo | typeof removeTodo | typeof setVisibilityFilter
 >;
 
 // --- Reducers ----------------------------------------------------------------
@@ -62,8 +59,7 @@ function todosReducer(state: Todo[] = [], action: Action): Todo[] {
       );
     case REMOVE_TODO:
       return state.filter(
-        (todo) =>
-          todo.id !== (action as ReturnType<typeof removeTodo>).payload.id,
+        (todo) => todo.id !== (action as ReturnType<typeof removeTodo>).payload.id,
       );
     default:
       return state;

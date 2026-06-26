@@ -11,17 +11,12 @@ export const visibilityFilterAtom = atom<VisibilityFilter>("SHOW_ALL");
 // --- Action atoms (write-only) -----------------------------------------------
 
 export const addTodoAtom = atom(null, (_get, set, text: string) => {
-  set(todosAtom, (todos) => [
-    ...todos,
-    { id: nextTodoId++, text, completed: false },
-  ]);
+  set(todosAtom, (todos) => [...todos, { id: nextTodoId++, text, completed: false }]);
 });
 
 export const toggleTodoAtom = atom(null, (_get, set, id: number) => {
   set(todosAtom, (todos) =>
-    todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-    ),
+    todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)),
   );
 });
 
@@ -29,12 +24,9 @@ export const removeTodoAtom = atom(null, (_get, set, id: number) => {
   set(todosAtom, (todos) => todos.filter((todo) => todo.id !== id));
 });
 
-export const setVisibilityFilterAtom = atom(
-  null,
-  (_get, set, filter: VisibilityFilter) => {
-    set(visibilityFilterAtom, filter);
-  },
-);
+export const setVisibilityFilterAtom = atom(null, (_get, set, filter: VisibilityFilter) => {
+  set(visibilityFilterAtom, filter);
+});
 
 // --- Derived atoms -----------------------------------------------------------
 
