@@ -14,17 +14,12 @@ import type { VisibilityFilter } from "../types";
 import {
   selectActiveTodoCount,
   selectVisibleTodos,
-  todoAdded,
-  todoRemoved,
-  todoToggled,
-  useAppDispatch,
-  useAppSelector,
-  visibilityFilterChanged,
+  useTodoStore,
 } from "./store";
 
 function AddTodo() {
   const [input, setInput] = useState("");
-  const dispatch = useAppDispatch();
+  const addTodo = useTodoStore((state) => state.addTodo);
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
@@ -32,7 +27,7 @@ function AddTodo() {
     if (!text) {
       return;
     }
-    dispatch(todoAdded({ text }));
+    addTodo(text);
     setInput("");
   };
 
@@ -58,16 +53,14 @@ type TodoItemProps = {
 };
 
 function TodoItem({ id, text, completed }: TodoItemProps) {
-  const dispatch = useAppDispatch();
+  const toggleTodo = useTodoStore((state) => state.toggleTodo);
+  const removeTodo = useTodoStore((state) => state.removeTodo);
 
   return (
     <Paper withBorder p="sm" radius="sm">
       <Group justify="space-between" wrap="nowrap">
         <Group gap="sm" wrap="nowrap">
-          <Checkbox
-            checked={completed}
-            onChange={() => dispatch(todoToggled({ id }))}
-          />
+          <Checkbox checked={completed} onChange={() => toggleTodo(id)} />
           <Text
             td={completed ? "line-through" : undefined}
             c={completed ? "dimmed" : undefined}
@@ -78,7 +71,7 @@ function TodoItem({ id, text, completed }: TodoItemProps) {
         <ActionIcon
           variant="subtle"
           color="red"
-          onClick={() => dispatch(todoRemoved({ id }))}
+          onClick={() => removeTodo(id)}
           aria-label="Remove todo"
         >
           ×
@@ -89,7 +82,7 @@ function TodoItem({ id, text, completed }: TodoItemProps) {
 }
 
 function TodoList() {
-  const todos = useAppSelector(selectVisibleTodos);
+  const todos = useTodoStore(selectVisibleTodos);
 
   if (todos.length === 0) {
     return (
@@ -121,15 +114,15 @@ type FilterLinkProps = {
 };
 
 function FilterLink({ filter, children }: FilterLinkProps) {
-  const dispatch = useAppDispatch();
-  const currentFilter = useAppSelector((state) => state.visibilityFilter);
-  const isActive = filter === currentFilter;
+  const visibilityFilter = useTodoStore((state) => state.visibilityFilter);
+  const setVisibilityFilter = useTodoStore((state) => state.setVisibilityFilter);
+  const isActive = filter === visibilityFilter;
 
   return (
     <Button
       variant={isActive ? "filled" : "light"}
       size="compact-sm"
-      onClick={() => dispatch(visibilityFilterChanged(filter))}
+      onClick={() => setVisibilityFilter(filter)}
     >
       {children}
     </Button>
@@ -137,7 +130,7 @@ function FilterLink({ filter, children }: FilterLinkProps) {
 }
 
 function Footer() {
-  const activeCount = useAppSelector(selectActiveTodoCount);
+  const activeCount = useTodoStore(selectActiveTodoCount);
 
   return (
     <Group justify="space-between" mt="md">

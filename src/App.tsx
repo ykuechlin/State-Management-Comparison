@@ -4,6 +4,7 @@ import { Link, Outlet } from "@tanstack/react-router";
 const links = [
   { label: "Redux legacy", to: "/redux-legacy" },
   { label: "Redux toolkit", to: "/redux-toolkit" },
+  { label: "Zustand", to: "/zustand" },
 ];
 
 export default function App() {

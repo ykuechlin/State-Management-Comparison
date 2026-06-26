@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import { connect, type ConnectedProps } from "react-redux";
 import type { Dispatch } from "redux";
+import type { VisibilityFilter } from "../types";
 import {
   addTodo,
   getActiveTodoCount,
@@ -21,7 +22,6 @@ import {
   toggleTodo,
   type RootState,
   type TodoAction,
-  type VisibilityFilter,
 } from "./store";
 
 // --- Presentational class components -----------------------------------------
