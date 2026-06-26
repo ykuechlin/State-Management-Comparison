@@ -12,6 +12,7 @@ import {
 import ReduxLegacyMain from "./redux-legacy";
 import ReduxToolkitMain from "./redux-toolkit";
 import ZustandMain from "./zustand";
+import JotaiMain from "./jotai";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -35,8 +36,19 @@ const zustandRoute = createRoute({
   component: ZustandMain,
 });
 
+const jotaiRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/jotai",
+  component: JotaiMain,
+});
+
 const router = createRouter({
-  routeTree: rootRoute.addChildren([reduxLegacyRoute, reduxToolkit, zustandRoute]),
+  routeTree: rootRoute.addChildren([
+    reduxLegacyRoute,
+    reduxToolkit,
+    zustandRoute,
+    jotaiRoute,
+  ]),
 });
 
 createRoot(document.getElementById("root")!).render(

@@ -5,6 +5,7 @@ const links = [
   { label: "Redux legacy", to: "/redux-legacy" },
   { label: "Redux toolkit", to: "/redux-toolkit" },
   { label: "Zustand", to: "/zustand" },
+  { label: "Jotai", to: "/jotai" },
 ];
 
 export default function App() {
