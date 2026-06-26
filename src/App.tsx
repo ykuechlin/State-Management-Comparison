@@ -7,6 +7,7 @@ const links = [
   { label: "Zustand", to: "/zustand" },
   { label: "Jotai", to: "/jotai" },
   { label: "Valtio", to: "/valtio" },
+  { label: "XState store", to: "/xstate-store" },
 ];
 
 export default function App() {

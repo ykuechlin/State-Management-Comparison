@@ -14,6 +14,7 @@ import ReduxToolkitMain from "./redux-toolkit";
 import ZustandMain from "./zustand";
 import JotaiMain from "./jotai";
 import ValtioMain from "./valtio";
+import XStateStoreMain from "./xstate-store";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -49,6 +50,12 @@ const valtioRoute = createRoute({
   component: ValtioMain,
 });
 
+const xstateStoreRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/xstate-store",
+  component: XStateStoreMain,
+});
+
 const router = createRouter({
   routeTree: rootRoute.addChildren([
     reduxLegacyRoute,
@@ -56,6 +63,7 @@ const router = createRouter({
     zustandRoute,
     jotaiRoute,
     valtioRoute,
+    xstateStoreRoute,
   ]),
 });
 
