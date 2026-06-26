@@ -1,14 +1,6 @@
 import { combineReducers, createStore, type Action } from "redux";
 
-// --- Types -------------------------------------------------------------------
-
-export type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
-
-export type VisibilityFilter = "SHOW_ALL" | "SHOW_ACTIVE" | "SHOW_COMPLETED";
+import type { Todo, VisibilityFilter } from "../types";
 
 export type RootState = {
   todos: Todo[];

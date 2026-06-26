@@ -1,4 +1,4 @@
-import { Component, type FormEvent } from "react";
+import { Component, type SubmitEvent } from "react";
 import {
   ActionIcon,
   Button,
@@ -37,7 +37,7 @@ type AddTodoState = {
 class AddTodo extends Component<AddTodoProps, AddTodoState> {
   state: AddTodoState = { input: "" };
 
-  handleSubmit = (event: FormEvent) => {
+  handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
     const text = this.state.input.trim();
     if (!text) {

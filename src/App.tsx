@@ -1,16 +1,28 @@
-import { Alert, Container } from "@mantine/core";
-import { Provider } from "react-redux";
-import { store, TodosApp } from "./redux-legacy";
+import { AppShell, Button, Group, Title } from "@mantine/core";
+import { Link, Outlet } from "@tanstack/react-router";
+
+const links = [
+  { label: "Redux legacy", to: "/redux-legacy" },
+  { label: "Redux toolkit", to: "/redux-toolkit" },
+];
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <Container size="sm" py="xl">
-        <Alert color="yellow" title="Legacy Redux demo" mb="lg">
-          Class components + <code>connect()</code> HOC, no Redux Toolkit
-        </Alert>
-        <TodosApp />
-      </Container>
-    </Provider>
+    <AppShell header={{ height: 64 }}>
+      <AppShell.Header>
+        <Group align="center" h="100%" px="lg">
+          <Title flex={1}>Overview of State management</Title>
+          {links.map((l) => (
+            <Button component={Link} to={l.to} key={l.to}>
+              {l.label}
+            </Button>
+          ))}
+        </Group>
+      </AppShell.Header>
+
+      <AppShell.Main>
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
   );
 }
