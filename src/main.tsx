@@ -13,6 +13,7 @@ import ReduxLegacyMain from "./redux-legacy";
 import ReduxToolkitMain from "./redux-toolkit";
 import ZustandMain from "./zustand";
 import JotaiMain from "./jotai";
+import ValtioMain from "./valtio";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -42,12 +43,19 @@ const jotaiRoute = createRoute({
   component: JotaiMain,
 });
 
+const valtioRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/valtio",
+  component: ValtioMain,
+});
+
 const router = createRouter({
   routeTree: rootRoute.addChildren([
     reduxLegacyRoute,
     reduxToolkit,
     zustandRoute,
     jotaiRoute,
+    valtioRoute,
   ]),
 });
 

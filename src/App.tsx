@@ -6,6 +6,7 @@ const links = [
   { label: "Redux toolkit", to: "/redux-toolkit" },
   { label: "Zustand", to: "/zustand" },
   { label: "Jotai", to: "/jotai" },
+  { label: "Valtio", to: "/valtio" },
 ];
 
 export default function App() {
